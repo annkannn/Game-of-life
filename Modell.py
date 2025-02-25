@@ -8,7 +8,7 @@ class cell:
         self.posy = posy
     def oppdater_celle_life(self,next_state):
         self.alive = next_state
-        
+#endring
     
 
 class GOL:
