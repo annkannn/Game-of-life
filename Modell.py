@@ -10,16 +10,30 @@ class cell:
     
 
 class GOL:
-    def __init__(self,lengde = 400 ,bredde = 400):
+    def __init__(self,lengde = 400 ,bredde = 400, celle = 10):
         pg.init()
         self.lengde = lengde
         self.bredde = bredde
         self.skjerm = pg.display.set_mode((self.lengde,self.bredde))
-        self.skjerm.fill((255,245,255))
+        self.skjerm.fill((144,245,144))
+        self.celle = celle
+        self.rader = self.bredde // self.celle
+        self.kolonner = self.lengde // self.celle
+        
+        #lager ruter med verdier fra 0 til 1, om de lever eller ikke
+        self.ruter = np.random.choice([0,1], size=(self.rader, self.kolonner))
         self.runnin = True
         
-    def run(self):
+
         
+    def Celler(self):
+        for i in range(self.rader):
+            for u in range(self.kolonner):
+                if self.ruter[i,u] == 1:
+                    pg.draw.rect(self.skjerm,(0,0,0),(u*self.celle, i*self.celle, self.celle-1, self.celle-1),)
+
+    def run(self):
+        self.Celler()
         while self.runnin:
             for event in pg.event.get():
                 if event.type == pg.QUIT:
